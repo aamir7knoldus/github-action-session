@@ -1,0 +1,44 @@
+name: Github-Action-Demo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  display:
+    name: Display Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Github Checkout
+        uses: actions/checkout@v2
+      - name: Display File
+        run: |
+          pwd
+          cat demo.txt
+      - name: new File
+        run: echo "Upload Artifacts" >> Rahul.txt
+      - name: Upload File
+        uses: actions/upload-artifact@v3
+        with:
+          name: Rahul_file
+          path: Rahul.txt
+  
+  append:
+    name: Append Job
+    # needs:
+    runs-on: ubuntu-latest
+    steps:
+      - name:  Github Checkout
+        uses: actions/checkout@v2
+      - name: Append into File
+        run: echo "This is Main Brach" >> demo.txt
+      - name: Print File
+        run: cat demo.txt
+      - name: Download File
+        uses: actions/download-artifact@v3
+        with:
+          name: Rahul_file
+      - name: Print Rahul's file
+        run: cat Rahul.txt
+
