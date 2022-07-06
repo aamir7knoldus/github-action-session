@@ -8,7 +8,7 @@ on:
 jobs:
   display:
     name: Display Job
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, demo_1]
     steps:
       - name: Github Checkout
         uses: actions/checkout@v2
